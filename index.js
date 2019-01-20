@@ -1,14 +1,22 @@
-var express = require('express');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var app = express();
+const app = express();
 
 app.use(express.static(__dirname));
+app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
-	res.render('index.html');
+app.get('/api/getScores', (req, res) => {
+	return res.status(200).json([
+		{ name: 'John Doe', points: 2 }
+	]);
 });
 
-var port = 3000;
-app.listen(port, function() {
+app.post('/api/submitEntry', (req, res) => {
+	return res.status(200).json({ points: 0 });
+});
+
+const port = 3000;
+app.listen(port, () => {
 	console.log('Server', process.pid, 'listening on port', port);
 });
