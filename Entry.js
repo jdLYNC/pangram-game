@@ -16,6 +16,28 @@ class Entry {
   }
 
   /**
+   * Checks entry word is palindrome.
+   * @return {boolean}
+   */
+  isPalindrome() {
+    const { word } = this;
+    const charArr = Entry.getCharArr(word);
+    const chars = charArr.join('');
+    const reverseChars = charArr.reverse().join('');
+    return chars === reverseChars;
+  }
+  
+  /**
+   * Points stored as a computed property based on the length of word.
+   * @member {number}
+   */
+  get points() {
+    if (this.isPalindrome()) return Entry.scoreWord(this.word);
+    else return 0;
+  }
+
+
+  /**
    * Creates character array for passed word, omitting whitespace.
    * @param {string} word - Word user submitted as entry.
    * @return {array} - Array of characters {string}.
