@@ -66,6 +66,49 @@ describe('class Entry', () => {
 
   describe('instance methods', () => {
 
+    describe('isPalindrome()', () => {
+
+      it('should return a boolean', () => {
+        const entry = new Entry({ word: 'apple' });
+        expect(entry.isPalindrome()).to.be.a('boolean');
+      });
+      
+      it('should return true for palindromes without spaces', () => {
+        const entry = new Entry({ word: 'toot' });
+        expect(entry.isPalindrome()).to.be.true;
+      });
+      
+      it('should return true for palindromes with spaces', () => {
+        const entry = new Entry({ word: 'toot toot' });
+        expect(entry.isPalindrome()).to.be.true;
+      });
+      
+      it('should return false for words that are not palindromes', () => {
+        const entry = new Entry({ word: 'impossible' });
+        expect(entry.isPalindrome()).to.be.false;
+      });
+      
+    });
+    
+    describe('get points', () => {
+      
+      it('should return 0 for a word that is not a palindrome', () => {
+        const entry = new Entry({ word: 'impossible' });
+        expect(entry.points).to.equal(0);
+      });
+      
+      it('should return points equivalent to the length of a palindrome without spaces', () => {
+        const entry = new Entry({ word: 'saas' });
+        expect(entry.points).to.equal(4);
+      });
+      
+      it('should return points equivalent to the length of a palindrome minus spaces for a palindrome with spaces', () => {
+        const entry = new Entry({ word: 'wow wow wow' });
+        expect(entry.points).to.equal(9);
+      });
+
+    });
+
   });
 
 });
